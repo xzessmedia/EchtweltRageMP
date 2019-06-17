@@ -11,6 +11,10 @@ Looking forward to your contributions to make this repository successful and ali
 - npm (npmjs.com)
 - mongodb
 
+For deployment:
+- docker
+- docker-compose
+
 ### Installation
 - Copy a fresh RageMP Server into the GameServer Directory so the executable server is under GameServer/server.exe
 - Make sure you have npm installed and MongoDB
@@ -27,6 +31,15 @@ On Windows you can simply use the batches in the root of this repository
 All files will be copied to the GameServer Directory so you are ready to go
 Database will install itself
 
+### Deployment
+Optional: Edit the Dockerfile to clone your own repository
+Optional: Edit the docker-compose.yml to open other ports i.e
+
+Make sure you have docker-compose installed!
+
+cd into the root directory of this repository and enter "docker-compose build" and then "docker-compose up -d"
+
+Dont't run a unsecured mongodb server on a public machine!
 
 ### Frontend
 As Frontend I used React together with SemanticUI.
