@@ -10,7 +10,6 @@ Looking forward to your contributions to make this repository successful and ali
 ### Requirements
 - git (https://git-scm.com/)
 - nodejs (use the LTS version https://nodejs.org/en/)
-- npm (npmjs.com)
 - mongodb (https://www.mongodb.com/download-center/community)
 
 #### For Deployment:
@@ -18,13 +17,16 @@ Looking forward to your contributions to make this repository successful and ali
 - docker-compose (https://docs.docker.com/compose/install/)
 
 ### Installation
+- Linux only: Just execute 'install.sh' and skip the next steps
+
 - Install gulp 'npm install -g gulp'
-- Copy a fresh RageMP Server into the GameServer Directory so the executable server is under GameServer/server.exe
+- For Development: Copy a fresh RageMP Server into the GameServer Directory so the executable server is under GameServer/server.exe
 - Make sure you have npm installed and MongoDB
 - enter cmd and type "npm install" in each of these Directories: ClientSource, ClientSource/CEF and ServerSource
 
-
 ### Building
+On Linux you can just call 'buildall.sh'
+
 On Windows you can simply use the batches in the root of this repository
 
 1. Build CEF: enter ClientSource/CEF and run "npm run-script build"

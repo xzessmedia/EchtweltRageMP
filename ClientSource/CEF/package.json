@@ -39,7 +39,6 @@
     "gulp-clean": "^0.4.0",
     "gulp-replace": "^1.0.0",
     "gulp-replace-string": "^0.6.1",
-    "rewire": "^4.0.1",
-    "semantic-ui": "^2.4.2"
+    "rewire": "^4.0.1"
   }
 }

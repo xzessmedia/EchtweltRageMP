@@ -14,7 +14,7 @@
   "author": "Tim Koepsel",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "7.0.22",
+    "@types/node": "10.10.0",
     "axios": "^0.18.0",
     "form-data": "^2.3.3",
     "gulp": "^4.0.0",

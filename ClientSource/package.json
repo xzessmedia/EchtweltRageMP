@@ -14,7 +14,7 @@
   "author": "Tim Koepsel",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "7.0.22",
+    "@types/node": "10.10.0",
     "gulp": "^4.0.0",
     "gulp-copy": "^4.0.1",
     "gulp-typescript": "^5.0.0",
