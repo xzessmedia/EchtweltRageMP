@@ -1,0 +1,50 @@
+.EWInventory {
+    width: 350px;
+    height: 600px;
+    margin-left: 250px;
+    margin-top: 125px;
+    padding: 20px;
+
+    // Text
+    color: #6176A5;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;  
+
+    // Rand
+    border-width: 2px;
+    border-style: solid;
+    border-color: #252D3F #4B5B7F;
+
+    // Hintergrund Farbverlauf
+    background: #3f4c6b; /* Old browsers */
+    background: -moz-linear-gradient(top, #3f4c6b 0%, #3f4c6b 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #3f4c6b 0%,#3f4c6b 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #3f4c6b 0%,#3f4c6b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+}
+
+.EWInventoryItem {
+    width: 80px;
+    height: 80px;
+    background-color: #252D3F;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000;
+    text-align: center;
+    .EWInventoryItemIcon{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        margin-left: 20%;
+        .EWInventoryItemText {
+            position: absolute;
+            bottom: 5px;
+            margin-left:50%;
+            transform: translateX(-180%);
+        }
+    }
+}
+

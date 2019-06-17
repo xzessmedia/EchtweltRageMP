@@ -1,0 +1,23 @@
+.PageKontakteScreen {
+    width: 100%;
+    height: 100%;
+
+    .KontaktePage {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f9fcf7+0,f5f9f0+100;L+Green+3D */
+        background: #f9fcf7; /* Old browsers */
+        background: -moz-linear-gradient(top, #f9fcf7 0%, #f5f9f0 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #f9fcf7 0%,#f5f9f0 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #f9fcf7 0%,#f5f9f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=0 ); /* IE6-9 */
+        height: 85%;
+        padding: 10px;
+        // Text
+        color: #000;
+        .BottomAppControl {
+            
+        }
+    }
+}
+
+
+

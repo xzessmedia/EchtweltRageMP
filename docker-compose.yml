@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+   ewreborn:
+     container_name: ewreborn
+     build:
+       context: .
+     volumes:
+       - ./data/ewreborn:/ewreborn
+     restart: unless-stopped
+     command: tail -F anything
+     ports:
+           - "22005:22005"
+           - "22006:22006"
+     networks:
+       - ewnet
+     environment:
+       - TEST_VAR=Dies ist ein Test
+   database:
+     image: mongo:3.2.20
+     container_name: ewreborn-db
+     restart: always
+     command: mongod --smallfiles --oplogSize 128
+     networks:
+       - ewnet
+     expose:
+       - 27017
+     volumes:
+       - ./data/ewreborn-db:/data/db
+       - ./data/ewreborn-db:/dump
+

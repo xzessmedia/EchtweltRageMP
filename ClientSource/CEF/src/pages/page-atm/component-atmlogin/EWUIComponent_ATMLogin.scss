@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=VT323');
+
+.ATMClock {
+    text-align: right;
+}
+
+.ATMLogin {
+    font-family: 'VT323', monospace !important;
+}
+
+.ATMFont {
+    font-family: 'VT323', monospace;
+}
+
+.ATMButtonBar {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+}
+
+.ATMInput {
+    width:100%;
+}
+
+.ATMcenter {
+    justify-content: center;
+    text-align: center;
+}

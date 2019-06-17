@@ -1,0 +1,87 @@
+.EWPhoneAppIcon {
+    height: 50px;
+    width: 50px;
+    color: #fff;
+    text-shadow: -1px 0 rgba(0, 0, 0, .2), 0 1px rgba(0, 0, 0, .2), 1px 0 rgba(0, 0, 0, .2), 0 -1px rgba(0, 0, 0, .2);
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, .2);
+    text-align: 'center';
+    display: inline-block
+}
+
+.CenterItem {
+    text-align: 'center';
+}
+
+.EWPhoneCallingIcon {
+    height: 50px;
+    width: 50px;
+    color: #fff;
+    text-shadow: -1px 0 rgba(0, 0, 0, .2), 0 1px rgba(0, 0, 0, .2), 1px 0 rgba(0, 0, 0, .2), 0 -1px rgba(0, 0, 0, .2);
+    border-radius: 50px;
+    padding: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, .2);
+    text-align: 'center';
+}
+
+.EWPhoneAppText {
+    text-align: 'center';
+    text-shadow: -1px 0 rgba(0, 0, 0, .3), 0 1px rgba(0, 0, 0, .3), 1px 0 rgba(0, 0, 0, .3), 0 -1px rgba(0, 0, 0, .3);
+    color: #fff;
+}
+
+.EWColorRed {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cc0000+0,cc0000+100;Red+Flat */
+    background: #cc0000; /* Old browsers */
+    background: -moz-linear-gradient(top, #cc0000 0%, #cc0000 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #cc0000 0%,#cc0000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #cc0000 0%,#cc0000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc0000', endColorstr='#cc0000',GradientType=0 ); /* IE6-9 */
+}
+.EWColorYellow {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eab92d+0,c79810+100;Yellow+3D+%232 */
+    background: #eab92d; /* Old browsers */
+    background: -moz-linear-gradient(top, #eab92d 0%, #c79810 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #eab92d 0%,#c79810 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #eab92d 0%,#c79810 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eab92d', endColorstr='#c79810',GradientType=0 ); /* IE6-9 */
+}
+
+.EWColorBlack {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#45484d+0,000000+100;Black+3D+%231 */
+    background: #45484d; /* Old browsers */
+    background: -moz-linear-gradient(top, #45484d 0%, #000000 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #45484d 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #45484d 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+.EWColorOrange {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff670f+0,ff670f+100;Orange+Flat+%231 */
+    background: #ff670f; /* Old browsers */
+    background: -moz-linear-gradient(top, #ff670f 0%, #ff670f 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ff670f 0%,#ff670f 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ff670f 0%,#ff670f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#ff670f',GradientType=0 ); /* IE6-9 */
+}
+
+.EWColorGreen {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#299a0b+0,299a0b+100;Green+Flat+%231 */
+background: #299a0b; /* Old browsers */
+background: -moz-linear-gradient(top, #299a0b 0%, #299a0b 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #299a0b 0%,#299a0b 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #299a0b 0%,#299a0b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#299a0b', endColorstr='#299a0b',GradientType=0 ); /* IE6-9 */
+}
+
+.EWColorBlue {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100;Blue+3D+%232 */
+background: #2c539e; /* Old browsers */
+background: -moz-linear-gradient(top, #2c539e 0%, #2c539e 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #2c539e 0%,#2c539e 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #2c539e 0%,#2c539e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#2c539e',GradientType=0 ); /* IE6-9 */
+}

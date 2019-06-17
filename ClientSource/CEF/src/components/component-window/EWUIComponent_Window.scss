@@ -1,0 +1,21 @@
+.EWUIWindow {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    // background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    width: 800px;
+    height: 800px;
+    border: 1px solid black;
+}
+
+.EWUIWindowTitle {
+    background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+    width: 100%;
+    height: 50px;
+    font-size: 48px;
+    border: 1px solid black;
+    color: darkgray;
+    padding: 10px;
+}
+
+.EWUICloseButton {
+    
+}

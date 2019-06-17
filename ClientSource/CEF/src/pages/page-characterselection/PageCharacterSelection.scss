@@ -1,0 +1,31 @@
+.ui label label {
+    width: 200px !important;
+}
+
+.centerContent {
+    text-align: right;
+    margin-right: 5px;
+}
+
+.baseSegment {
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+    top: 25px;
+    margin-top:25px;
+}
+
+.CharacterSelectionPage {
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    position: fixed;
+    background-image: url('/wallpaper.jpg') !important;
+    background-size: cover !important;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    overflow:hidden;
+    padding: 150px;
+}

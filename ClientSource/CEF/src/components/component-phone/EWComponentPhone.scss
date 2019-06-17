@@ -1,0 +1,38 @@
+.EWPhone {
+    background-image: url('/ewphone.png');
+    background-size: cover;
+    width: 391px;
+    height: 807px;
+    display: flex;
+
+    // No Select
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.EWPhoneDisplay {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #000;
+    border-radius: 50px;
+    width: 371px;
+    height:787px;
+    color: #fff;
+}
+
+.EWPhoneDisplayScreen {
+    border-radius: 50px !important;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 5px;
+    height: 100%;
+    width: 100%;
+    opacity: 1.0;
+}

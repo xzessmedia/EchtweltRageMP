@@ -1,0 +1,65 @@
+body {
+    background: transparent;
+}
+.EWAusweis {
+    width: 712px;
+    height: 398px;
+    background-color: #fff;
+    background-image: url('/bgausweis.png');
+    background-position: center;
+    background-size: cover;
+    border-radius: 25px;
+    color: black;
+}
+.EWAusweisTitel {
+    font-family: 'Staatliches', cursive;
+    color: #fff;
+    font-weight: 400;
+    font-size: 36px;
+    font-stretch: ultra-expanded;
+}
+.EWAusweisTitelBar {
+    background-color: rgb(56, 106, 159)
+}
+.EWAusweisInfoText {
+    margin-left: 35%;
+}
+
+.EWAusweisBarcode {
+    position: absolute;
+    left:220px;
+    top: 350px;
+    display: block;
+    font-size: 56px;
+    opacity: 0.6;
+    font-stretch: ultra-expanded;
+    font-family: 'Libre Barcode 39', cursive;
+}
+#element1 {
+    position: absolute;
+    top:100px;
+    display: block;
+    left: 220px;
+    .value {
+        position: absolute;
+    }
+}
+#element2 {
+    position: absolute;
+    top: 180px;
+    display: block;
+    left: 200px;
+    .value {
+        position: absolute;
+    }
+}
+
+.ui.statistic {
+    .label {
+        font-weight: 700 !important;
+    }
+    .value {
+        font-size: 2em !important;
+        font-weight: 700 !important;
+    }
+}

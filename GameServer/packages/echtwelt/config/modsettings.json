@@ -1,0 +1,35 @@
+{
+    "ModVersion": 0.2901,
+    "Modus": "Staging",
+    "Debug": true,
+    "Servername": "Echtwelt",
+    "Currency": "$",
+    "StartingMoney": 750,
+    "MaxDefaultInventoryDimension": 100,
+    "MaxDefaultInventoryWeight": 100,
+    "MaxDefaultAllowedCharacterCount": 2,
+    "WelcomeMessage": [
+        "Herzlich willkommen bei Echtwelt Reborn!",
+        "Besucht uns unter www.echtwelt-life.de"
+    ],
+    "DatabaseProduction": "mongodb://localhost:27017/echtweltreborn",
+    "DatabaseStaging": "mongodb://localhost:27017/echtweltreborntest",
+    "BaseNumberplatePrefix": "ew",
+    "PoliceNumberplatePrefix": "lsp",
+    "MedicNumberplatePrefix": "lsm",
+    "GovermentNumberplatePrefix": "lsgov",
+    "NewPlayerStartLocation": {
+        "x": -1082.522,
+        "y": -2719.15,
+        "z": -7.410131
+    },
+    "StartTime": {
+        "hours": 8,
+        "minutes": 0,
+        "seconds": 0
+    },
+    "Whitelisting": {
+        "WoltlabVerificationKey": "aksdjasd2j8121u2e1en12j3h123",
+        "WoltlabUrl": "https://www.echtwelt-life.de/WBB-Verify.php"
+    }
+}

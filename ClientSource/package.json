@@ -1,0 +1,42 @@
+{
+  "name": "ewreborn-client",
+  "version": "2.0.0",
+  "description": "xzess serverboilerplate on typescript base",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp",
+    "dev": "tsc --watch & nodemon dist",
+    "test": "tsc && mocha dist/**/*.spec.js",
+    "lint": "eslint src --ext ts",
+    "tsc": "tsc"
+  },
+  "keywords": [],
+  "author": "Tim Koepsel",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "7.0.22",
+    "gulp": "^4.0.0",
+    "gulp-copy": "^4.0.1",
+    "gulp-typescript": "^5.0.0",
+    "nodemon": "1.11.0",
+    "pg": "^7.8.0",
+    "pg-hstore": "^2.3.2",
+    "rage-rpc": "^0.1.1",
+    "tedious": "^4.1.3",
+    "through2": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "2.2.41",
+    "@types/node": "7.0.22",
+    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#master",
+    "eslint": "5.6.0",
+    "eslint-config-airbnb-base": "11.2.0",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-promise": "3.5.0",
+    "mocha": "3.4.2",
+    "supertest": "3.0.0",
+    "tsc": "1.20150623.0",
+    "typescript": "^3.2.4",
+    "typescript-eslint-parser": "3.0.0"
+  }
+}

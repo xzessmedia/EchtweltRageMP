@@ -1,0 +1,1 @@
+{"version":3,"file":"LocationPolice.js","sourceRoot":"","sources":["../../../../src/modules/world/locations/LocationPolice.ts"],"names":[],"mappings":";AAAA;;;;;GAKG;;AAEH,0DAAmD;AAGlD,MAAM,cAAe,SAAQ,sBAAY;IACrC;QACI,KAAK,CAAC,SAAS,EAAE,EAAE,EAAE,IAAI,EAAE,CAAC,OAAO,CAAC,QAAQ,EAAE,CAAC,QAAQ,EAAE,OAAO,CAAC,EAAE,IAAI,EAAE,EAAE,CAAC,CAAC;IACjF,CAAC;CACJ;AAED,kBAAe,cAAc,CAAC"}

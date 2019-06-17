@@ -1,0 +1,11 @@
+{
+  "main.css": "/main.css",
+  "main.js": "/main.js",
+  "main.js.map": "/main.js.map",
+  "static/media/semantic.min.css": "/static/media/brand-icons.a1a749e8.svg",
+  "static/media/logo.svg": "/static/media/logo.ee7cd8ed.svg",
+  "main.css.map": "/main.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.5e81753dbdcdf26dbfc84e0f01fa1daa.js": "/precache-manifest.5e81753dbdcdf26dbfc84e0f01fa1daa.js",
+  "service-worker.js": "/service-worker.js"
+}
