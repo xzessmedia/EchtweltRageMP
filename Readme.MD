@@ -1,4 +1,4 @@
-## Echtwelt Reborn Rage MP on base of NodeJS+MongoDB+React/SemanticUI
+# Echtwelt Reborn Rage MP on base of NodeJS+MongoDB+React/SemanticUI
 
 Unfinished Server but a good starter platform and development setup.
 
@@ -13,7 +13,7 @@ Looking forward to your contributions to make this repository successful and ali
 - npm (npmjs.com)
 - mongodb (https://www.mongodb.com/download-center/community)
 
-# For Deployment:
+#### For Deployment:
 - docker (https://docs.docker.com/docker-for-windows/install/)
 - docker-compose (https://docs.docker.com/compose/install/)
 
@@ -36,13 +36,13 @@ Database will install itself
 
 ### Deployment on Live Server
 
-# Way 1
+#### Way 1
 
 - On the target machine install docker
 - git clone the repository to the machine
 - Run DeployServer.sh
 
-# Way 2
+#### Way 2
 
 - Install docker on your development machine
 - Self-Host a private docker registry
