@@ -46,3 +46,5 @@ As Frontend I used React together with SemanticUI.
 To start a development server you can run "npm start" inside ClientSource/CEF.
 
 You can checkout the routes inside the ClientSource/CEF/src/index.js to see what we have yet
+
+https://www.youtube.com/watch?v=f0z5HJUnpwc

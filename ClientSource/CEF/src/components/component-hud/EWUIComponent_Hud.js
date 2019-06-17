@@ -13,7 +13,7 @@ class EWUIComponent_Hud extends React.Component {
 
         this.state = {
             ewversion: '0.0.0.1 beta',
-            money: props.money != null ? props.money : 19999750,
+            money: props.money != null ? props.money : 500,
             food: props.food != null ? props.food : 1.0,
             thirst: props.thirst != null ? props.thirst : 1.0,
             voice: props.voice != null ? props.voice : 'Normal',
@@ -57,8 +57,8 @@ class EWUIComponent_Hud extends React.Component {
             
             </div>
             <div className="EWHudBar">
-                <EWUIComponent_StatusIcon percentage={100} color='red' icon='food'  iconsize='large' />
-                <EWUIComponent_StatusIcon percentage={100} color='orange' icon='gulp'  iconsize='large' />
+                <EWUIComponent_StatusIcon percentage={50} color='green' icon='food'  iconsize='large' />
+                <EWUIComponent_StatusIcon percentage={50} color='orange' icon='gulp'  iconsize='large' />
                 <EWUIComponent_StatusIcon percentage={100} color='blue' icon='bolt'  iconsize='large' />
                 <EWUIComponent_StatusIcon percentage={100} color='blue' icon='audible'  iconsize='large' />
                 {/* <EWUIComponent_StatusIcon percentage={100} color='blue' icon='google'  iconsize='large' />

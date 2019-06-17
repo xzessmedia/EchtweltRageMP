@@ -23,6 +23,10 @@ class EWPhonePageHome extends React.Component {
         alert('test');
     }
 
+    DemoApp() {
+        alert('My Demo App exec');
+    }
+
     render() {
         return (
             <div className="EWPhoneHomescreen">
@@ -33,16 +37,16 @@ class EWPhonePageHome extends React.Component {
                     <Grid columns={5}>
                         <Grid.Row>
                             <Grid.Column>
-                            <EWPhoneAppIcon execute={()=>this.TestApp()} text="TestApp" icon="fire" size='large' color='EWColorBlack'/>
+                                <EWPhoneAppIcon execute={()=>this.TestApp()} text="TestApp" icon="fire" size='large' color='EWColorBlack'/>
                             </Grid.Column>
                             <Grid.Column>
-                            <EWPhoneAppIcon execute={()=>this.AppsStore()} text="Appstore" icon="sitemap" size='large' color='EWColorOrange'/>    
+                                <EWPhoneAppIcon execute={()=>this.AppsStore()} text="Appstore" icon="sitemap" size='large' color='EWColorOrange'/>    
                             </Grid.Column>
                             <Grid.Column>
-                                
+                            <EWPhoneAppIcon execute={()=>this.DemoApp()} text="Demo" icon="gulp" size='large' color='EWColorBlue'/>
                             </Grid.Column>
                             <Grid.Column>
-                            <EWPhoneAppIcon execute={()=>this.AudibleApp()} text="Audible" icon="audible" size='large' color='EWColorOrange'/>    
+                                <EWPhoneAppIcon execute={()=>this.AudibleApp()} text="Audible" icon="audible" size='large' color='EWColorOrange'/>    
                             </Grid.Column>
                             <Grid.Column>
                                 
