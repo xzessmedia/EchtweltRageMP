@@ -36,6 +36,14 @@ Database will install itself
 
 ### Deployment on Live Server
 
+#### ** Dont't run a unsecured mongodb server on a public machine! **
+
+The following should give you a start and should be secured by yourself
+before uploading on a remote server!
+
+##### Master your tools
+
+
 #### Way 1
 
 - On the target machine install docker
@@ -56,7 +64,7 @@ Make sure you have docker-compose installed!
 
 cd into the root directory of this repository and enter "docker-compose build" and then "docker-compose up -d"
 
-Dont't run a unsecured mongodb server on a public machine!
+#### ** Dont't run a unsecured mongodb server on a public machine! **
 
 ### Frontend
 As Frontend I used React together with SemanticUI.
