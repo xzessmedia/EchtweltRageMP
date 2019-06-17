@@ -8,14 +8,17 @@ https://discord.gg/KmPZy9f
 Looking forward to your contributions to make this repository successful and alive :)
 
 ### Requirements
+- git (https://git-scm.com/)
+- nodejs (use the LTS version https://nodejs.org/en/)
 - npm (npmjs.com)
-- mongodb
+- mongodb (https://www.mongodb.com/download-center/community)
 
-For deployment:
-- docker
-- docker-compose
+# For Deployment:
+- docker (https://docs.docker.com/docker-for-windows/install/)
+- docker-compose (https://docs.docker.com/compose/install/)
 
 ### Installation
+- Install gulp 'npm install -g gulp'
 - Copy a fresh RageMP Server into the GameServer Directory so the executable server is under GameServer/server.exe
 - Make sure you have npm installed and MongoDB
 - enter cmd and type "npm install" in each of these Directories: ClientSource, ClientSource/CEF and ServerSource
@@ -31,8 +34,22 @@ On Windows you can simply use the batches in the root of this repository
 All files will be copied to the GameServer Directory so you are ready to go
 Database will install itself
 
-### Deployment
-Optional: Edit the Dockerfile to clone your own repository
+### Deployment on Live Server
+
+# Way 1
+
+- On the target machine install docker
+- git clone the repository to the machine
+- Run DeployServer.sh
+
+# Way 2
+
+- Install docker on your development machine
+- Self-Host a private docker registry
+- Build the container 'docker run --tag "ewreborn" .'
+- Push ewreborn into your private registry
+- Change docker-compose.yml so it uses the image of the docker registry
+
 Optional: Edit the docker-compose.yml to open other ports i.e
 
 Make sure you have docker-compose installed!
@@ -48,3 +65,7 @@ To start a development server you can run "npm start" inside ClientSource/CEF.
 You can checkout the routes inside the ClientSource/CEF/src/index.js to see what we have yet
 
 https://www.youtube.com/watch?v=f0z5HJUnpwc
+
+### Tools
+- Visual Studio Code for development (https://code.visualstudio.com/)
+- Robomongo for Database Administration (https://robomongo.org/)
