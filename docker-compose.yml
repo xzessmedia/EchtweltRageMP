@@ -12,8 +12,6 @@ services:
      ports:
            - "22005:22005"
            - "22006:22006"
-     networks:
-       - ewnet
      environment:
        - TEST_VAR=Dies ist ein Test
    database:
@@ -21,8 +19,6 @@ services:
      container_name: ewreborn-db
      restart: always
      command: mongod --smallfiles --oplogSize 128
-     networks:
-       - ewnet
      expose:
        - 27017
      volumes:
