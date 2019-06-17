@@ -1,2 +1,5 @@
+.lock
+.log
+data
 Tools
 node_modules
