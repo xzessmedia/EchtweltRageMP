@@ -12,6 +12,21 @@ class EchtweltClient {
         this.InitHud();
         this.InitEvents();
         this.InitLocalPlayer();
+        this.Configure();
+    }
+    Configure() {
+        /** Whitelisting
+         *
+         * If you want to enable Woltlab Whitelisting, change the next config to true
+         * Change Whitelisting Configuration in Server Config
+         * @ /ServerSource/src/config/modsettings.json
+         *
+         * WoltlabVerificationKey must be set to a random key defined in WBB-Verify.php
+         * WoltlabUrl must be set to the URL of WBB-Verify.php
+         *
+         * You can download WBB-Verify.php here: https://gt-mp.net/filebase/file/58-wbb-verify/
+         */
+        this._CFG_EnableWhitelist = false;
     }
     InitLocalPlayer() {
         var player = mp.players.local;
@@ -158,7 +173,12 @@ class EchtweltClient {
             mp.gui.cursor.show(false, false);
             mp.gui.chat.activate(true);
             this._ClientBrowserCEF.destroy();
-            mp.events.callRemote('EW-Woltlab-Login', value);
+            if (this._CFG_EnableWhitelist === true) {
+                mp.events.callRemote('EW-Woltlab-Login', value);
+            }
+            else {
+                mp.events.callRemote('EW-After-Login', value);
+            }
         });
     }
     InitHud() {

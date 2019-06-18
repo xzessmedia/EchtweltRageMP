@@ -76,6 +76,12 @@ class EchtweltMod {
             var vehicle = mp.vehicles.new(data.item.Hash, new mp.Vector3(data.playerposition.x, data.playerposition.y, data.playerposition.z));
             vehicle.numberPlate = 'EWReborn';
         });
+        mp.events.add('EW-After-Login', (player, item) => {
+            //Log.PrintConsole(item);
+            //Log.PrintConsole(JSON.stringify(player));
+            var data = JSON.parse(item);
+            CorePlayer_1.default.OnLogin(player, data);
+        });
         mp.events.add('EW-Woltlab-Login', (player, item) => {
             //Log.PrintConsole(item);
             //Log.PrintConsole(JSON.stringify(player));
