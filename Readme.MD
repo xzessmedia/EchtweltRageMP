@@ -40,6 +40,8 @@ Database will install itself
 
 ### Deployment on Live Server
 
+https://youtu.be/AUCaTNtTtqU
+
 #### ** Dont't run a unsecured mongodb server on a public machine! **
 
 The following should give you a start and should be secured by yourself
