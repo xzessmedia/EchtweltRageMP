@@ -52,7 +52,7 @@ before uploading on a remote server!
 
 - On the target machine install docker
 - git clone the repository to the machine
-- Run DeployServer.sh
+- Run 'sudo sh install.sh && sudo sh buildall.sh && sudo sh DeployServer.sh'
 
 #### Way 2
 
