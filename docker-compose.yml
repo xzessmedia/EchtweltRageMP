@@ -5,10 +5,11 @@ services:
      container_name: ewreborn
      build:
        context: .
-     volumes:
-       - ./data/ewreborn:/ewreborn
+#    volumes:
+#       - ./data/ewreborn:/ewreborn
      restart: unless-stopped
-     command: tail -F anything
+     command: tail -F /ewreborn/logs/server.log
+     # entrypoint: /ewreborn/server && bash
      ports:
            - "22005:22005"
            - "22006:22006"

@@ -1,5 +1,7 @@
 # Echtwelt Reborn Rage MP on base of NodeJS+MongoDB+React/SemanticUI
 
+[![GitHub](https://img.shields.io/github/license/xzessmedia/EchtweltRageMP.svg)](#)
+
 Unfinished Server but a good starter platform and development setup.
 
 To discuss and get help please join this Discord (Please don't use issue tracker for discussion)
