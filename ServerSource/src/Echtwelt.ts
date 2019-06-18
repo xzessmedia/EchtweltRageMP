@@ -86,8 +86,8 @@ export class EchtweltMod {
     mp.events.add('EW-Woltlab-Login', (player, item) => {
       //Log.PrintConsole(item);
       //Log.PrintConsole(JSON.stringify(player));
-      var data = JSON.parse(item);
-      var result = Whitelisting.VerifyLogin(data.username, data.password).then((data) => {
+      var credentials = JSON.parse(item);
+      var result = Whitelisting.VerifyLogin(credentials.username, credentials.password).then((data) => {
         Log.PrintConsole(JSON.stringify(result));
         if (data != null) {
           if (data.verify === true) {
