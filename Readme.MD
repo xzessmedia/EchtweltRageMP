@@ -83,3 +83,9 @@ https://www.youtube.com/watch?v=f0z5HJUnpwc
 ### Tools
 - Visual Studio Code for development (https://code.visualstudio.com/)
 - Robomongo for Database Administration (https://robomongo.org/)
+
+### Custom Vehicles
+Optional: You can download the last EchtweltRageMP Modpack here https://www.echtwelt-life.de/filebase/index.php?entry/13-echtweltragempmodpack/
+Password to access: OpenSource
+
+To install, just copy the "dlcpacks" directory into your gameservers "client_packages" directory

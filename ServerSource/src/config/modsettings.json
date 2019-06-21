@@ -29,7 +29,8 @@
         "seconds": 0
     },
     "Whitelisting": {
-    "WoltlabVerificationKey": "",
-    "WoltlabUrl": "https://www.yoururl.com/WBB-Verify.php"
+        "IsEnabled": false,
+        "WoltlabVerificationKey": "",
+        "WoltlabUrl": "https://www.yoururl.com/WBB-Verify.php"
     }
 }

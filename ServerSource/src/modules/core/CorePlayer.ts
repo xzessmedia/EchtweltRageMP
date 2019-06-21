@@ -48,15 +48,16 @@ class CorePlayer {
         try {
             var account = await AccountManager.LoadAccount(player.socialClub, '');
             Log.Debug('Account Id: '+account.id);
+
             // Character Selection
             var characters = await CharacterManager.LoadCharactersByAccount(account.id);
-            //var characters = null;
-            ///var characters = null;
+
             if (characters != null && characters.length > 0) {
                 var chars = [];
-                Log.Debug('Es wurden '+characters.length+' Charaktere gefunden');
+                Log.Debug(characters.length+' Characters found');
+
                 characters.forEach((item, index) => {
-                    Log.Debug('Charakterdaten werden umgewandelt: '+JSON.stringify(item));
+                    Log.Debug('Receiving Character Data: '+JSON.stringify(item));
                     var t_item = item.toObject();
                     chars.push({
                         id: t_item._id,
@@ -66,12 +67,12 @@ class CorePlayer {
                         handmoney: t_item.handmoney
                     });
                 });
+
                 var dataobj = {data: chars, maxAllowedChars: settings.MaxDefaultAllowedCharacterCount};
                 var datastrobj = JSON.stringify(dataobj);
-                Log.Debug('Umwandlung abgeschlossen, es wird ans CEF gesendet: '+datastrobj);
                 rpc.callClient(player, 'EW-Character-Selection', dataobj);
             } else {
-                Log.Debug('Es wurden keine Charaktere gefunden');
+                Log.Debug('No Characters found');
                 rpc.callClient(player, 'EW-Character-Selection', JSON.stringify({data: [], maxAllowedChars: settings.MaxDefaultAllowedCharacterCount}));
             }
         } catch (error) {
@@ -79,8 +80,12 @@ class CorePlayer {
         }
     }
 
+    async OnCharacterDeath(player: PlayerMp) {
+        player.outputChatBox('You died');
+    }
+
     SpawnAsNewCharacter(player: PlayerMp) {
-        player.notify('Du atmest tief ein und nimmst einen ersten Atemzug auf ' + settings.Servername);
+        player.notify('You are breathing deep while inhaling your first breath on ' + settings.Servername);
         player.spawn(new mp.Vector3(settings.NewPlayerStartLocation.x,settings.NewPlayerStartLocation.y,settings.NewPlayerStartLocation.z));
     }
 

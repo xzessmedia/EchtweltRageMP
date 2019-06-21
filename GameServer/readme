@@ -1,2 +1,11 @@
 If you don't use the docker Deployment and want to to everything by yourself,
 feel free to add a clean RageMP Server here
+
+
+Custom Vehicles:
+Optional: The Carspawner requires the last EchtweltRageMP Modpack.
+Just extract the content to your gameserver directory (this one) or extract and copy the dlcpacks folder into the client_packages directory
+
+https://www.echtwelt-life.de/filebase/index.php?entry/13-echtweltragempmodpack/
+
+Password: OpenSource

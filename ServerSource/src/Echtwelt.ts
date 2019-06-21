@@ -37,6 +37,7 @@ export class EchtweltMod {
     }
 }
   
+
   async InitEchtwelt() {
     if (await this.InitDatabase()) {
       Log.PrintConsole('Database has been initialised');
@@ -46,6 +47,10 @@ export class EchtweltMod {
     }
   }
   
+  /*******************************************************************************************************
+   * Server Events
+   */
+
   InitRageEvents() {
     mp.events.add('playerJoin', player => {
       Log.PrintConsole(`${player.name} has entered the server!`);
@@ -56,19 +61,8 @@ export class EchtweltMod {
       Log.PrintConsole(`${player.name} has spawned at ${JSON.stringify(player.position)}`);
     });
     
-    mp.events.add('Pong', player => {
-      Log.PrintConsole('Pong erhalten');
-      player.outputChatBox('Server: Pong');
-    });
-    
-    rpc.register('Pong',() => {
-      // if (player) {
-      //   player.outputChatBox('Pong!');
-      //   player.notify('Pong');
-      // }
-      Log.PrintConsole('Pong!');
-    });
-    
+
+    /** called from cef */
     rpc.register('EW-CarSpawn-SpawnVehicle', (item) => {
       Log.PrintConsole('Receiving Data: '+item);
       var data = JSON.parse(item);
@@ -76,41 +70,39 @@ export class EchtweltMod {
       vehicle.numberPlate = 'EWReborn';
     });
 
-    mp.events.add('EW-After-Login', (player, item) => {
-      //Log.PrintConsole(item);
-      //Log.PrintConsole(JSON.stringify(player));
-      var data = JSON.parse(item);
-      Player.OnLogin(player, data);
-    });
-
     mp.events.add('EW-Woltlab-Login', (player, item) => {
-      //Log.PrintConsole(item);
-      //Log.PrintConsole(JSON.stringify(player));
-      var credentials = JSON.parse(item);
-      var result = Whitelisting.VerifyLogin(credentials.username, credentials.password).then((data) => {
-        Log.PrintConsole(JSON.stringify(result));
-        if (data != null) {
-          if (data.verify === true) {
-            player.notify('Du hast dich erfolgreich ~g~angemeldet');
-            Player.OnLogin(player, data);
-          } else {
-            player.notify('Anmeldung ~r~nicht erfolgreich');
-            player.call('EW-ShowLoginScreen', true);
+      const credentials = JSON.parse(item);
+      
+      if (settings.Whitelisting.IsEnabled === true) {
+        var result = Whitelisting.VerifyLogin(credentials.username, credentials.password).then((data) => {
+          Log.PrintConsole(JSON.stringify(result));
+          if (data != null) {
+            if (data.verify === true) {
+              player.notify('Du hast dich erfolgreich ~g~angemeldet');
+              Player.OnLogin(player, data);
+            } else {
+              player.notify('Anmeldung ~r~nicht erfolgreich');
+              player.call('EW-ShowLoginScreen', true);
+            }
           }
-        }
-      })
-      .catch((error) => {
-        Log.PrintConsole('ERROR: '+error);
-      });
+        })
+        .catch((error) => {
+          Log.PrintConsole('ERROR: '+error);
+        });
+      } else {
+        var data = JSON.parse(item);
+        Player.OnLogin(player, data);
+      }
     });
     
     mp.events.add('playerDeath', (player) => {
-      player.outputChatBox('Du bist tot');
+      Player.OnCharacterDeath(player);
     });
 
+    /** called from cef */
     mp.events.add('EW-Character-RequestCreate', (player: PlayerMp, data) => {
-      //Log.Debug(JSON.stringify(player) + ' | ' + JSON.stringify(data));
       Log.Debug('Requesting Character creation ('+player.name+')');
+
       try {
         Player.SpawnAsNewCharacter(player);
         AccountManager.LoadAccount(player.socialClub, '').then((account) => {
@@ -123,15 +115,15 @@ export class EchtweltMod {
     });
 
     rpc.register('EW-Teleporter-Direction', (data) => {
-      Log.PrintConsole('Erhalte Daten: ' + data);
+      Log.PrintConsole('Received: ' + data);
     });
 
     rpc.register('EW-Teleporter-Location', (data) => {
-      Log.PrintConsole('Erhalte Daten: ' + data);
+      Log.PrintConsole('Received: ' + data);
     });
 
     rpc.register('EW-Character-Selected', (data) => {
-      Log.PrintConsole('Spieler wählte Charakter - Erhalte Daten: ' + data);
+      Log.PrintConsole('Player choosed character.. receiving data: ' + data);
     });
 
     Log.PrintConsole('Events has been loaded');
