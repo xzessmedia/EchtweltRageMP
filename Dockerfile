@@ -1,12 +1,10 @@
 FROM ubuntu:18.04
 
-MAINTAINER Tim Koepsel <xzesstence@gmail.com>
-
+MAINTAINER Tim Koepsel
 
 EXPOSE 22005
 EXPOSE 22005/udp
 EXPOSE 22006
-
 
 WORKDIR /ewreborn
 
@@ -16,8 +14,6 @@ apt-get install git -q -y && \
 apt-get install lsof -q -y && \
 apt-get install sudo -q -y && \
 apt-get install curl -q -y
-
-
 
 # Install required packages
 RUN apt-get update -q \
@@ -38,9 +34,6 @@ apt update && apt -q -y install libstdc++6
 RUN wget https://cdn.rage.mp/lin/ragemp-srv-037.tar.gz && \
 tar -xzf ragemp-srv-037.tar.gz
 
-#RUN ln -s /srv/ragemp/x64/conf.json /ewreborn/conf.json
-
-
 ADD ServerSource/node_modules /ewreborn/node_modules
 ADD GameServer /ewreborn/ragemp-srv
 
@@ -48,5 +41,3 @@ COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT /docker-entrypoint.sh
-
-#CMD "/docker-entrypoint.sh"

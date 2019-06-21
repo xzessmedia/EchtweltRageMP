@@ -24,7 +24,8 @@ Looking forward to your contributions to make this repository successful and ali
 - Install gulp 'npm install -g gulp'
 - For Development: Copy a fresh RageMP Server into the GameServer Directory so the executable server is under GameServer/server.exe
 - Make sure you have npm installed and MongoDB
-- enter cmd and type "npm install" in each of these Directories: ClientSource, ClientSource/CEF and ServerSource
+- Enter cmd and type "npm install" in each of these Directories: ClientSource, ClientSource/CEF and ServerSource
+- Finally edit /ServerSource/src/config/modsettings.json and add your database credentials. If you are using docker-compose, you can leave it
 
 ### Building
 On Linux you can just call 'buildall.sh'
