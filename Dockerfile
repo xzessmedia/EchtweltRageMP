@@ -29,7 +29,6 @@ RUN apt-get update -q \
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
 apt update && apt -q -y install libstdc++6
 
-
 # Downloading and installing server
 RUN wget https://cdn.rage.mp/lin/ragemp-srv-037.tar.gz && \
 tar -xzf ragemp-srv-037.tar.gz
