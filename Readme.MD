@@ -94,4 +94,7 @@ To install, just copy the "dlcpacks" directory into your gameservers "client_pac
 
 ### Whitelisting and Woltlab
 Optional: To use our whitelisting, you can use this plugin on your woltlab server
-https://gt-mp.net/filebase/file/58-wbb-verify/
+https://github.com/DasChaosAT/WbbVerify
+
+But be careful what you are doing or you are backdooring your woltlab site very easy.
+This can be huge security leak!
