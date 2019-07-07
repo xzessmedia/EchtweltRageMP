@@ -50,6 +50,10 @@ before uploading on a remote server!
 
 ##### Master your tools
 
+#### Manual Deployment
+If you want to deploy manually instead of using docker, you have to copy the node_modules directory into your server root!
+If you want to use docker, just follow way 1 or way 2
+
 
 #### Way 1
 
@@ -57,7 +61,7 @@ before uploading on a remote server!
 - git clone the repository to the machine
 - Run 'sudo sh install.sh && sudo sh buildall.sh && sudo sh DeployServer.sh'
 
-#### Way 2
+#### Way 2 (Recommnended)
 
 - Install docker on your development machine
 - Self-Host a private docker registry
