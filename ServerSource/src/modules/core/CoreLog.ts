@@ -14,7 +14,7 @@ import * as settings from '../../config/modsettings.json';
 
      AddLog(logmessage: string, category = 'default', type = 'log') {
         var t_log = new EWLog({
-            createdAt: new Date,
+            createdAt: new Date(),
             message: logmessage,
             category: category,
             type: type
@@ -24,7 +24,7 @@ import * as settings from '../../config/modsettings.json';
 
      AddPlayerLog(logmessage: string, player: PlayerMp) {
         var t_log = new EWLog({
-            createdAt: new Date,
+            createdAt: new Date(),
             message: logmessage,
             category: 'player',
             type: this.PlayerInfo(player,true)
