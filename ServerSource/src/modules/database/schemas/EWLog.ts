@@ -6,14 +6,14 @@
  */
 
 import { Document, Schema, Model, model} from "mongoose";
-
+import { IEWLog } from './../interfaces/IEWLog';
 export var EWLogSchema: Schema = new Schema({
     createdAt: Date,
     message: String,
     category: String,
     type: String
   });
-  EWLogSchema.pre("save", (next) => {
+  EWLogSchema.pre("save", (next) =>  {
     let now = new Date();
     if (!this.createdAt) {
       this.createdAt = now;
@@ -21,4 +21,4 @@ export var EWLogSchema: Schema = new Schema({
     next();
   });
   
-  export const EWLog = model("EWLog", EWLogSchema);
+  export const EWLog = model<any>("EWLog", EWLogSchema);

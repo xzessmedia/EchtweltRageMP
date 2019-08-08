@@ -13,7 +13,7 @@ class CoreLog {
     }
     AddLog(logmessage, category = 'default', type = 'log') {
         var t_log = new EWLog_1.EWLog({
-            createdAt: new Date,
+            createdAt: new Date(),
             message: logmessage,
             category: category,
             type: type
@@ -22,7 +22,7 @@ class CoreLog {
     }
     AddPlayerLog(logmessage, player) {
         var t_log = new EWLog_1.EWLog({
-            createdAt: new Date,
+            createdAt: new Date(),
             message: logmessage,
             category: 'player',
             type: this.PlayerInfo(player, true)

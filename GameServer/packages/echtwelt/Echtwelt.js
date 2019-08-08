@@ -51,6 +51,9 @@ class EchtweltMod {
             }
         });
     }
+    /*******************************************************************************************************
+     * Server Events
+     */
     InitRageEvents() {
         mp.events.add('playerJoin', player => {
             CoreLog_1.default.PrintConsole(`${player.name} has entered the server!`);
@@ -59,55 +62,43 @@ class EchtweltMod {
         mp.events.add('playerSpawn', player => {
             CoreLog_1.default.PrintConsole(`${player.name} has spawned at ${JSON.stringify(player.position)}`);
         });
-        mp.events.add('Pong', player => {
-            CoreLog_1.default.PrintConsole('Pong erhalten');
-            player.outputChatBox('Server: Pong');
-        });
-        rpc.register('Pong', () => {
-            // if (player) {
-            //   player.outputChatBox('Pong!');
-            //   player.notify('Pong');
-            // }
-            CoreLog_1.default.PrintConsole('Pong!');
-        });
+        /** called from cef */
         rpc.register('EW-CarSpawn-SpawnVehicle', (item) => {
             CoreLog_1.default.PrintConsole('Receiving Data: ' + item);
             var data = JSON.parse(item);
             var vehicle = mp.vehicles.new(data.item.Hash, new mp.Vector3(data.playerposition.x, data.playerposition.y, data.playerposition.z));
             vehicle.numberPlate = 'EWReborn';
         });
-        mp.events.add('EW-After-Login', (player, item) => {
-            //Log.PrintConsole(item);
-            //Log.PrintConsole(JSON.stringify(player));
-            var data = JSON.parse(item);
-            CorePlayer_1.default.OnLogin(player, data);
-        });
         mp.events.add('EW-Woltlab-Login', (player, item) => {
-            //Log.PrintConsole(item);
-            //Log.PrintConsole(JSON.stringify(player));
-            var data = JSON.parse(item);
-            var result = Woltlab_js_1.default.VerifyLogin(data.username, data.password).then((data) => {
-                CoreLog_1.default.PrintConsole(JSON.stringify(result));
-                if (data != null) {
-                    if (data.verify === true) {
-                        player.notify('Du hast dich erfolgreich ~g~angemeldet');
-                        CorePlayer_1.default.OnLogin(player, data);
+            const credentials = JSON.parse(item);
+            if (settings.Whitelisting.IsEnabled === true) {
+                var result = Woltlab_js_1.default.VerifyLogin(credentials.username, credentials.password).then((data) => {
+                    CoreLog_1.default.PrintConsole(JSON.stringify(result));
+                    if (data != null) {
+                        if (data.verify === true) {
+                            player.notify('Du hast dich erfolgreich ~g~angemeldet');
+                            CorePlayer_1.default.OnLogin(player, data);
+                        }
+                        else {
+                            player.notify('Anmeldung ~r~nicht erfolgreich');
+                            player.call('EW-ShowLoginScreen', true);
+                        }
                     }
-                    else {
-                        player.notify('Anmeldung ~r~nicht erfolgreich');
-                        player.call('EW-ShowLoginScreen', true);
-                    }
-                }
-            })
-                .catch((error) => {
-                CoreLog_1.default.PrintConsole('ERROR: ' + error);
-            });
+                })
+                    .catch((error) => {
+                    CoreLog_1.default.PrintConsole('ERROR: ' + error);
+                });
+            }
+            else {
+                var data = JSON.parse(item);
+                CorePlayer_1.default.OnLogin(player, data);
+            }
         });
         mp.events.add('playerDeath', (player) => {
-            player.outputChatBox('Du bist tot');
+            CorePlayer_1.default.OnCharacterDeath(player);
         });
+        /** called from cef */
         mp.events.add('EW-Character-RequestCreate', (player, data) => {
-            //Log.Debug(JSON.stringify(player) + ' | ' + JSON.stringify(data));
             CoreLog_1.default.Debug('Requesting Character creation (' + player.name + ')');
             try {
                 CorePlayer_1.default.SpawnAsNewCharacter(player);
@@ -121,13 +112,13 @@ class EchtweltMod {
             }
         });
         rpc.register('EW-Teleporter-Direction', (data) => {
-            CoreLog_1.default.PrintConsole('Erhalte Daten: ' + data);
+            CoreLog_1.default.PrintConsole('Received: ' + data);
         });
         rpc.register('EW-Teleporter-Location', (data) => {
-            CoreLog_1.default.PrintConsole('Erhalte Daten: ' + data);
+            CoreLog_1.default.PrintConsole('Received: ' + data);
         });
         rpc.register('EW-Character-Selected', (data) => {
-            CoreLog_1.default.PrintConsole('Spieler wählte Charakter - Erhalte Daten: ' + data);
+            CoreLog_1.default.PrintConsole('Player choosed character.. receiving data: ' + data);
         });
         CoreLog_1.default.PrintConsole('Events has been loaded');
     }

@@ -29,6 +29,7 @@
         "seconds": 0
     },
     "Whitelisting": {
+        "IsEnabled": false,
         "WoltlabVerificationKey": "",
         "WoltlabUrl": "https://www.yoururl.com/WBB-Verify.php"
     }
