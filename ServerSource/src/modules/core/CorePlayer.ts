@@ -113,9 +113,14 @@ class CorePlayer {
     Cuff(player: PlayerMp, newCuffState: boolean) {
         let t_data = <BasePlayerData> JSON.parse(player.getVariable('data'));
         t_data.IsCuffed = newCuffState;
-        player.setVariable('data', JSON.stringify(t_data));
-        player.invoke('16076435279705359098', player, true);
-        player.playAnimation('mp_arresting', 'idle', 1.0, (1 << 0 | 1 << 4 | 1 << 5));
+        Player.SaveData(player, t_data);
+        player.invoke('16076435279705359098', player, newCuffState);
+        
+        if (newCuffState === true) {
+            player.playAnimation('mp_arresting', 'idle', 1.0, (1 << 0 | 1 << 4 | 1 << 5));
+        } else {
+            player.stopAnimation();
+        }
     }
 
     Revive(player: PlayerMp) {
