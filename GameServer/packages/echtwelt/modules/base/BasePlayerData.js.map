@@ -1,1 +1,1 @@
-{"version":3,"file":"BasePlayerData.js","sourceRoot":"","sources":["../../../src/modules/base/BasePlayerData.ts"],"names":[],"mappings":";AAAA;;;;;GAKG;;AAEF,MAAM,cAAc;CAGnB;AAED,kBAAe,cAAc,CAAC"}
+{"version":3,"file":"BasePlayerData.js","sourceRoot":"","sources":["../../../src/modules/base/BasePlayerData.ts"],"names":[],"mappings":";AAAA;;;;;GAKG;;AAEH,2CAAoC;AAEnC,MAAqB,cAAc;IAMhC,YAAY,gBAAsB,GAAG,EAAE,cAAoB,GAAG;QAC3D,IAAI,CAAC,SAAS,GAAG,IAAI,mBAAS,CAAC,aAAa,EAAE,WAAW,CAAC,CAAC;QAC3D,IAAI,CAAC,QAAQ,GAAG,KAAK,CAAC;IACzB,CAAC;CACH;AAVD,iCAUC"}

@@ -12,13 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: Tim Koepsel
  * @Date: 2019-02-05 22:11:28
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-26 23:34:56
+ * @Last Modified time: 2019-08-26 20:24:20
  */
 const CoreLog_1 = require("./CoreLog");
 const settings = require("../../config/modsettings.json");
 const EWAccountManager_1 = require("./managers/EWAccountManager");
 const EWCharacterManager_1 = require("./managers/EWCharacterManager");
 const rpc = require("rage-rpc");
+const CoreDatabase_1 = require("./CoreDatabase");
 class CorePlayer {
     constructor() {
     }
@@ -76,20 +77,34 @@ class CorePlayer {
             }
         });
     }
-    OnCharacterDeath(player) {
+    OnCharacterDeath(player, reason = 'Unknown') {
         return __awaiter(this, void 0, void 0, function* () {
             player.outputChatBox('You died');
+            CoreLog_1.default.AddPlayerLog('Player died at ' + JSON.stringify(player.position) + ' Reason: ' + reason, player);
         });
     }
     SpawnAsNewCharacter(player) {
         player.notify('You are breathing deep while inhaling your first breath on ' + settings.Servername);
         player.spawn(new mp.Vector3(settings.NewPlayerStartLocation.x, settings.NewPlayerStartLocation.y, settings.NewPlayerStartLocation.z));
+        CoreDatabase_1.default.SyncPlayerDataFromDatabase(player);
     }
     SpawnAsExistingCharacter(player, playerdata) {
         let lastposition = JSON.parse(playerdata.lastposition);
         player.spawn(new mp.Vector3(lastposition.x, lastposition.y, lastposition.z));
+        CoreDatabase_1.default.SyncPlayerDataFromDatabase(player);
     }
     SaveData(player, data) {
+        player.setVariable('data', JSON.stringify(data));
+    }
+    LoadData(player) {
+        return JSON.parse(player.getVariable('data'));
+    }
+    Cuff(player, newCuffState) {
+        let t_data = JSON.parse(player.getVariable('data'));
+        t_data.IsCuffed = newCuffState;
+        player.setVariable('data', JSON.stringify(t_data));
+        player.invoke('16076435279705359098', player, true);
+        player.playAnimation('mp_arresting', 'idle', 1.0, (1 << 0 | 1 << 4 | 1 << 5));
     }
     Revive(player) {
         var revivepos = new mp.Vector3(player.position.x, player.position.y, player.position.z + 2);
