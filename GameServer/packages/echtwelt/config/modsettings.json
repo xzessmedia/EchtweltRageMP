@@ -12,8 +12,8 @@
         "Herzlich willkommen bei Echtwelt Reborn!",
         "Besucht uns unter www.echtwelt-life.de"
     ],
-    "DatabaseProduction": "mongodb://database:27017/echtweltreborn",
-    "DatabaseStaging": "mongodb://database:27017/echtweltreborntest",
+    "DatabaseProduction": "mongodb://localhost:27017/echtweltreborn",
+    "DatabaseStaging": "mongodb://localhost:27017/echtweltreborntest",
     "BaseNumberplatePrefix": "ew",
     "PoliceNumberplatePrefix": "lsp",
     "MedicNumberplatePrefix": "lsm",
@@ -29,6 +29,7 @@
         "seconds": 0
     },
     "Whitelisting": {
+        "IsEnabled": false,
         "WoltlabVerificationKey": "",
         "WoltlabUrl": "https://www.yoururl.com/WBB-Verify.php"
     }

@@ -1,12 +1,13 @@
+/*
+ * @Author: Tim Koepsel 
+ * @Date: 2019-10-22 23:44:27 
+ * @Last Modified by:   Tim Koepsel 
+ * @Last Modified time: 2019-10-22 23:44:27 
+ */
+
+ 
 import RageColor from "../../../EWDefinitions";
 import BaseLocation from "../../base/BaseLocation";
-
-/*
- * @Author: Dennis Reich 
- * @Date: 2019-02-08 21:48:34 
- * @Last Modified by: Dennis Reich
- * @Last Modified time: 2019-02-08 22:10:54
- */
 
 class LocationGericht extends BaseLocation {
     constructor() {

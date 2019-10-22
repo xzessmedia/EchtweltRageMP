@@ -2,20 +2,17 @@
  * @Author: Tim Koepsel 
  * @Date: 2019-02-05 20:44:43 
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-26 22:57:21
+ * @Last Modified time: 2019-10-23 00:40:48
  */
 import * as mongoose from "mongoose";
 import * as rpc from 'rage-rpc';
 import * as settings from './config/modsettings.json';
-import CoreDatabase from "./modules/core/CoreDatabase";
+import CoreApi from "./modules/core/CoreApi";
 import Player from "./modules/core/CorePlayer";
 import Log from "./modules/core/CoreLog";
 import Game from "./modules/core/CoreGame";
-import AccountManager from "./modules/core/managers/EWAccountManager";
-import { EWAccount } from "./modules/database/schemas/EWAccount";
 import Whitelisting from "./modules/core/additional/whitelisting/Woltlab.js";
-import EWCharacterManager from './modules/core/managers/EWCharacterManager';
-import CharacterManager from "./modules/core/managers/EWCharacterManager";
+import Character from "./modules/core/CoreCharacter.js";
 
 export class EchtweltMod {
   
@@ -25,26 +22,12 @@ export class EchtweltMod {
     
   }
 
-  public InitDatabase(): Promise<typeof mongoose> {
-    try {
-      if (settings.Modus === "Staging") {
-        return mongoose.connect(settings.DatabaseStaging,{useNewUrlParser: true});
-      } else {
-        return mongoose.connect(settings.DatabaseProduction);
-      }
-    } catch (error) {
-      Log.Debug(error);
-    }
-}
   
 
   async InitEchtwelt() {
-    if (await this.InitDatabase()) {
-      Log.PrintConsole('Database has been initialised');
-      this.InitRageEvents();
-      Game.InitGame();
-      Log.AddLog('Server has started', 'system');
-    }
+    this.InitRageEvents();
+    Game.InitGame();
+    Log.AddLog('Server has started', 'System');
   }
   
   /*******************************************************************************************************
@@ -53,18 +36,18 @@ export class EchtweltMod {
 
   InitRageEvents() {
     mp.events.add('playerJoin', player => {
-      Log.PrintConsole(`${player.name} has entered the server!`);
+      Log.AddSystemLog(`${player.name} has entered the server!`);
       Player.InitPlayer(player);
     });
     
     mp.events.add('playerSpawn', player => {
-      Log.PrintConsole(`${player.name} has spawned at ${JSON.stringify(player.position)}`);
+      Log.AddSystemLog(`${player.name} has spawned at ${JSON.stringify(player.position)}`);
     });
     
 
     /** called from cef */
     rpc.register('EW-CarSpawn-SpawnVehicle', (item) => {
-      Log.PrintConsole('Receiving Data: '+item);
+      Log.AddDebugLog('Receiving Data: '+item);
       var data = JSON.parse(item);
       var vehicle = mp.vehicles.new(data.item.Hash,new mp.Vector3(data.playerposition.x, data.playerposition.y, data.playerposition.z));
       vehicle.numberPlate = 'EWReborn';
@@ -74,8 +57,9 @@ export class EchtweltMod {
       const credentials = JSON.parse(item);
       
       if (settings.Whitelisting.IsEnabled === true) {
+        Log.AddDebugLog('Whitelisting enabled! Trying to Login: (Player):'+JSON.stringify(player) + '(Data):'+JSON.stringify(item));
         var result = Whitelisting.VerifyLogin(credentials.username, credentials.password).then((data) => {
-          Log.PrintConsole(JSON.stringify(result));
+          Log.AddDebugLog(JSON.stringify(result));
           if (data != null) {
             if (data.verify === true) {
               player.notify('Du hast dich erfolgreich ~g~angemeldet');
@@ -87,11 +71,16 @@ export class EchtweltMod {
           }
         })
         .catch((error) => {
-          Log.PrintConsole('ERROR: '+error);
+          Log.AddErrorLog(error, 'Event: EW-Woltlab-Login');
         });
       } else {
-        var data = JSON.parse(item);
-        Player.OnLogin(player, data);
+        Log.AddDebugLog('Whitelisting disabled! Skipping Login: (Player):'+JSON.stringify(player) + '(Data):'+JSON.stringify(item));
+        try {
+          var data = JSON.parse(item);
+          Player.OnLogin(player, data);
+        } catch (error) {
+          Log.AddErrorLog(error, 'Event: EW-Woltlab-Login');
+        }
       }
     });
     
@@ -100,30 +89,33 @@ export class EchtweltMod {
     });
 
     /** called from cef */
-    mp.events.add('EW-Character-RequestCreate', (player: PlayerMp, data) => {
+    mp.events.add('EW-Character-RequestCreate', async (player: PlayerMp, data) => {
       Log.Debug('Requesting Character creation ('+player.name+')');
 
+      let playerdata = await Player.GetPlayerData(player);
+
       try {
-        Player.SpawnAsNewCharacter(player);
-        AccountManager.LoadAccount(player.socialClub, '').then((account) => {
-          var chardata = JSON.parse(data);
-          CharacterManager.CreateCharacter(account.id, chardata.firstname, chardata.lastname);
-        });
+        var chardata = JSON.parse(data);
+
+          // WIP: Frontend / CEF needs to be extended with fields for gender etc.
+          Character.CreateCharacter(playerdata, chardata.firstname, chardata.lastname, new Date(), true);
+          Player.SpawnAsNewCharacter(player);
+        
       } catch (error) {
         Log.Debug(error);
       }
     });
 
     rpc.register('EW-Teleporter-Direction', (data) => {
-      Log.PrintConsole('Received: ' + data);
+      Log.AddDebugLog('Received: ' + JSON.stringify(data), 'Event: EW-Teleporter-Direction');
     });
 
     rpc.register('EW-Teleporter-Location', (data) => {
-      Log.PrintConsole('Received: ' + data);
+      Log.AddDebugLog('Received: ' + JSON.stringify(data), 'Event: EW-Teleporter-Location');
     });
 
     rpc.register('EW-Character-Selected', (data) => {
-      Log.PrintConsole('Player choosed character.. receiving data: ' + data);
+      Log.AddDebugLog('Player choosed character.. receiving data: ' + JSON.stringify(data), 'Event: EW-Character-Selected');
     });
 
     Log.PrintConsole('Events has been loaded');

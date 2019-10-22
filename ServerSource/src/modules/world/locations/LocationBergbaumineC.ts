@@ -1,8 +1,8 @@
 /*
- * @Author: Dennis Reich 
- * @Date: 2019-02-08 22:33:55 
- * @Last Modified by: Dennis Reich
- * @Last Modified time: 2019-02-08 22:34:34
+ * @Author: Tim Koepsel 
+ * @Date: 2019-10-22 23:43:28 
+ * @Last Modified by:   Tim Koepsel 
+ * @Last Modified time: 2019-10-22 23:43:28 
  */
 
 import BaseLocation from "../../base/BaseLocation";

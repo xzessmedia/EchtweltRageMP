@@ -48,13 +48,11 @@ class CorePlayer {
                 CoreLog_1.default.Debug('Account Id: ' + account.id);
                 // Character Selection
                 var characters = yield EWCharacterManager_1.default.LoadCharactersByAccount(account.id);
-                //var characters = null;
-                ///var characters = null;
                 if (characters != null && characters.length > 0) {
                     var chars = [];
-                    CoreLog_1.default.Debug('Es wurden ' + characters.length + ' Charaktere gefunden');
+                    CoreLog_1.default.Debug(characters.length + ' Characters found');
                     characters.forEach((item, index) => {
-                        CoreLog_1.default.Debug('Charakterdaten werden umgewandelt: ' + JSON.stringify(item));
+                        CoreLog_1.default.Debug('Receiving Character Data: ' + JSON.stringify(item));
                         var t_item = item.toObject();
                         chars.push({
                             id: t_item._id,
@@ -66,11 +64,10 @@ class CorePlayer {
                     });
                     var dataobj = { data: chars, maxAllowedChars: settings.MaxDefaultAllowedCharacterCount };
                     var datastrobj = JSON.stringify(dataobj);
-                    CoreLog_1.default.Debug('Umwandlung abgeschlossen, es wird ans CEF gesendet: ' + datastrobj);
                     rpc.callClient(player, 'EW-Character-Selection', dataobj);
                 }
                 else {
-                    CoreLog_1.default.Debug('Es wurden keine Charaktere gefunden');
+                    CoreLog_1.default.Debug('No Characters found');
                     rpc.callClient(player, 'EW-Character-Selection', JSON.stringify({ data: [], maxAllowedChars: settings.MaxDefaultAllowedCharacterCount }));
                 }
             }
@@ -79,8 +76,13 @@ class CorePlayer {
             }
         });
     }
+    OnCharacterDeath(player) {
+        return __awaiter(this, void 0, void 0, function* () {
+            player.outputChatBox('You died');
+        });
+    }
     SpawnAsNewCharacter(player) {
-        player.notify('Du atmest tief ein und nimmst einen ersten Atemzug auf ' + settings.Servername);
+        player.notify('You are breathing deep while inhaling your first breath on ' + settings.Servername);
         player.spawn(new mp.Vector3(settings.NewPlayerStartLocation.x, settings.NewPlayerStartLocation.y, settings.NewPlayerStartLocation.z));
     }
     SpawnAsExistingCharacter(player, playerdata) {

@@ -8,6 +8,7 @@
  class BasePlayerData {
     public AccountId: string;
     public CharacterId: string;
+    public HandMoney: number;
  }
 
  export default BasePlayerData;

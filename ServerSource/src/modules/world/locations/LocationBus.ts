@@ -1,9 +1,10 @@
 /*
- * @Author: Dennis Reich 
- * @Date: 2019-02-08 22:35:53 
- * @Last Modified by: Dennis Reich
- * @Last Modified time: 2019-02-08 22:36:43
+ * @Author: Tim Koepsel 
+ * @Date: 2019-10-22 23:43:52 
+ * @Last Modified by:   Tim Koepsel 
+ * @Last Modified time: 2019-10-22 23:43:52 
  */
+
 
 import BaseLocation from "../../base/BaseLocation";
 import RageColor from "../../../EWDefinitions";

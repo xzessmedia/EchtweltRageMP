@@ -2,7 +2,7 @@
  * @Author: Tim Koepsel 
  * @Date: 2019-02-05 20:44:43 
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-22 19:37:38
+ * @Last Modified time: 2019-09-11 16:54:42
  */
 import * as rpc from 'rage-rpc';
 
@@ -180,7 +180,7 @@ class EchtweltClient {
       mp.gui.cursor.show(false, false);
       mp.gui.chat.activate(true);
       this._ClientBrowserCEF.destroy();
-
+      
       mp.events.callRemote('EW-Woltlab-Login', value);
 
     });

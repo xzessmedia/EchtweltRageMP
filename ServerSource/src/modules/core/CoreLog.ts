@@ -2,34 +2,103 @@
  * @Author: Tim Koepsel 
  * @Date: 2019-02-08 02:29:56 
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-19 20:22:28
+ * @Last Modified time: 2019-10-22 23:58:59
  */
-import { EWLog } from "../database/schemas/EWLog";
+
 import * as settings from '../../config/modsettings.json';
+import CoreApi from "./CoreApi";
 
  class CoreLog {
      constructor() {
          
      }
 
-     AddLog(logmessage: string, category = 'default', type = 'log') {
-        var t_log = new EWLog({
-            createdAt: new Date,
-            message: logmessage,
-            category: category,
-            type: type
-        });
-        t_log.save();
+     async AddLog(logmessage:string, category:string = 'default', logtype:number = 0, source:string ='unknown', printToConsole: boolean = false) {
+        try {
+            var t_log = {
+                CreatedAt: new Date().toISOString(),
+                Source: source,
+                Category: category,
+                LogType: logtype,
+                Message: logmessage
+            }
+            await CoreApi.post('/logs',t_log);
+
+            if (printToConsole == true) {
+                this.PrintConsole(logmessage, true);
+            }
+        } catch (error) {
+            this.PrintConsole('Error while posting log file: '+ JSON.stringify(error));
+        }
      }
 
-     AddPlayerLog(logmessage: string, player: PlayerMp) {
-        var t_log = new EWLog({
-            createdAt: new Date,
-            message: logmessage,
-            category: 'player',
-            type: this.PlayerInfo(player,true)
-        });
-        t_log.save();
+     async AddSystemLog(logmessage:string, category:string = 'System', logtype:number = 1, source:string ='unknown', printToConsole: boolean = true) {
+        try {
+            var t_log = {
+                CreatedAt: new Date().toISOString(),
+                Source: source,
+                Category: category,
+                LogType: logtype,
+                Message: logmessage
+            }
+            await CoreApi.post('/logs',t_log);
+
+            if (printToConsole == true) {
+                this.PrintConsole(logmessage, true);
+            }
+        } catch (error) {
+            this.PrintConsole('Error while posting log file: '+ JSON.stringify(error));
+        }
+     }
+
+     async AddDebugLog(logmessage:string, source:string ='unknown', printToConsole: boolean = true) {
+        try {
+            if(settings.Debug === false) return;
+            var t_log = {
+                CreatedAt: new Date().toISOString(),
+                Source: source,
+                Category: 'Debug',
+                LogType: 2,
+                Message: logmessage
+            }
+            await CoreApi.post('/logs',t_log);
+
+            if (printToConsole == true) {
+                this.PrintConsole(logmessage, true);
+            }
+        } catch (error) {
+            this.PrintConsole('Error while posting log file: '+ JSON.stringify(error));
+        }
+     }
+
+     async AddPlayerLog(logmessage: string, player: PlayerMp, category: string = 'Player') {
+        try {
+            var t_log = {
+                CreatedAt: new Date().toISOString(),
+                Source: JSON.stringify(player),
+                Category: 'Player',
+                LogType: 3,
+                Message: logmessage
+            }
+            await CoreApi.post('/logs',t_log);
+        } catch (error) {
+            this.PrintConsole('Error while posting player log file: '+ JSON.stringify(error));
+        }
+     }
+
+     async AddErrorLog(logmessage:object, source:string ='unknown') {
+        try {
+            var t_log = {
+                CreatedAt: new Date().toISOString(),
+                Source: source,
+                Category: 'Errors',
+                LogType: 999,
+                Message: JSON.stringify(logmessage)
+            }
+            await CoreApi.post('/logs',t_log);
+        } catch (error) {
+            this.PrintConsole('Error while posting log file: '+ JSON.stringify(error));
+        }
      }
 
      PlayerInfo(player: PlayerMp, detailed = false) {
