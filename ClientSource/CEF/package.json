@@ -5,11 +5,8 @@
   "dependencies": {
     "butter-toast": "^3.2.2",
     "circular-json": "^0.5.9",
-    "gulp": "^4.0.0",
-    "gulp-copy": "^4.0.1",
-    "gulp-typescript": "^5.0.0",
     "node-sass": "^4.11.0",
-    "rage-rpc": "^0.1.1",
+    "rage-rpc": "github:xzessmedia/rage-rpc#master",
     "react": "^16.7.0",
     "react-circular-progressbar": "^1.0.0",
     "react-dom": "^16.7.0",
@@ -39,6 +36,8 @@
     "gulp-clean": "^0.4.0",
     "gulp-replace": "^1.0.0",
     "gulp-replace-string": "^0.6.1",
+    "gulp-copy": "^4.0.1",
+    "gulp-typescript": "^5.0.0",
     "rewire": "^4.0.1"
   }
 }

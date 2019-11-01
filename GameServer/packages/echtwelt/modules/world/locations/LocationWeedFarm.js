@@ -1,9 +1,9 @@
 "use strict";
 /*
- * @Author: Dennis Reich
- * @Date: 2019-02-08 22:22:01
- * @Last Modified by: Dennis Reich
- * @Last Modified time: 2019-02-08 22:23:14
+ * @Author: Tim Koepsel
+ * @Date: 2019-10-22 23:45:28
+ * @Last Modified by:   Tim Koepsel
+ * @Last Modified time: 2019-10-22 23:45:28
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseLocation_1 = require("../../base/BaseLocation");

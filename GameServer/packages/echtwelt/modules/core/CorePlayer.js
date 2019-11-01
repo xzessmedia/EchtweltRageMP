@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -12,54 +13,124 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Author: Tim Koepsel
  * @Date: 2019-02-05 22:11:28
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-26 23:34:56
+ * @Last Modified time: 2019-10-23 00:53:49
  */
 const CoreLog_1 = require("./CoreLog");
 const settings = require("../../config/modsettings.json");
-const EWAccountManager_1 = require("./managers/EWAccountManager");
-const EWCharacterManager_1 = require("./managers/EWCharacterManager");
 const rpc = require("rage-rpc");
+const CoreApi_1 = require("./CoreApi");
+const CoreCharacter_1 = require("./CoreCharacter");
 class CorePlayer {
     constructor() {
     }
     InitPlayer(player) {
-        // Show Welcome Messages
-        for (let index = 0; index < settings.WelcomeMessage.length; index++) {
-            const element = settings.WelcomeMessage[index];
-            player.outputChatBox(element);
-        }
-        // Handle Whitelisting
-        player.call('EW-ShowLoginScreen', true);
-        CoreLog_1.default.PrintConsole('Player spawning at ' + JSON.stringify(player.position));
-        CoreLog_1.default.AddPlayerLog('Initialising ', player);
-    }
-    OnLogin(player, userdata) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Check Account
-            if ((yield EWAccountManager_1.default.HasAccount(player.socialClub, '')) === true) {
-                CoreLog_1.default.PrintConsole('Player ' + player.socialClub + ' has an account');
+            // Show Welcome Messages
+            for (let index = 0; index < settings.WelcomeMessage.length; index++) {
+                const element = settings.WelcomeMessage[index];
+                player.outputChatBox(element);
+            }
+            if ((yield this.IsPlayerRegistered(player)) !== false) {
+                let playerdata = yield this.GetPlayerData(player);
+                this.UpdatePlayerVisit(player, playerdata);
             }
             else {
-                CoreLog_1.default.PrintConsole('Player ' + player.socialClub + ' has no account and registers one');
-                EWAccountManager_1.default.CreateAccount(player.socialClub, player.name, '', JSON.stringify(userdata));
+                yield this.RegisterPlayer(player);
             }
+            // Handle Whitelisting
+            player.call('EW-ShowLoginScreen', true);
+            CoreLog_1.default.PrintConsole('Player spawning at ' + JSON.stringify(player.position));
+            CoreLog_1.default.AddPlayerLog('Initialising ', player);
+        });
+    }
+    IsPlayerRegistered(player) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Check if player is known
             try {
-                var account = yield EWAccountManager_1.default.LoadAccount(player.socialClub, '');
-                CoreLog_1.default.Debug('Account Id: ' + account.id);
+                let api_result = yield CoreApi_1.default.get(`/players?filter={"where":{"SocialClubName":"${player.socialClub}"}}`);
+                if (api_result.data !== null) {
+                    let data = api_result.data;
+                    if (data.length > 0) {
+                        return false;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+            catch (error) {
+                CoreLog_1.default.AddErrorLog(error, 'IsPlayerRegistered()');
+            }
+        });
+    }
+    GetPlayerData(player) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // Check if player is known
+            try {
+                let api_result = yield CoreApi_1.default.get(`/players?filter={"where":{"SocialClubName":"${player.socialClub}"}}`);
+                if (api_result.data !== null) {
+                    let data = api_result.data;
+                    if (data.length > 0) {
+                        return data[0];
+                    }
+                    else {
+                        return null;
+                    }
+                }
+            }
+            catch (error) {
+                CoreLog_1.default.AddErrorLog(error, 'GetPlayer()');
+            }
+        });
+    }
+    RegisterPlayer(player, email = 'nothing', password = 'nothing') {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let t_player = {
+                    FirstSeenAt: new Date().toISOString(),
+                    LastSeenAt: new Date().toISOString(),
+                    SocialClubName: player.socialClub,
+                    EMail: email,
+                    Password: password,
+                    IsBanned: false
+                };
+                let api_result = yield CoreApi_1.default.post(`/players`, t_player);
+            }
+            catch (error) {
+                CoreLog_1.default.AddErrorLog(error, 'RegisterPlayer()');
+            }
+        });
+    }
+    UpdatePlayerVisit(player, playerdata) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                // Update and patch Last Seen Timestamp
+                playerdata.LastSeenAt = new Date().toISOString();
+                let api_result = yield CoreApi_1.default.patch(`/players`, playerdata);
+            }
+            catch (error) {
+                CoreLog_1.default.AddErrorLog(error, 'UpdatePlayerVisit()');
+            }
+        });
+    }
+    // WIP -> We need to change some Api fields (Handmoney, Job)
+    OnLogin(player, userdata) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
                 // Character Selection
-                var characters = yield EWCharacterManager_1.default.LoadCharactersByAccount(account.id);
+                var playerdata = yield Player.GetPlayerData(player);
+                var characters = yield CoreCharacter_1.default.GetCharacters(playerdata);
                 if (characters != null && characters.length > 0) {
                     var chars = [];
-                    CoreLog_1.default.Debug(characters.length + ' Characters found');
+                    CoreLog_1.default.AddDebugLog(characters.length + ' Characters found');
                     characters.forEach((item, index) => {
                         CoreLog_1.default.Debug('Receiving Character Data: ' + JSON.stringify(item));
-                        var t_item = item.toObject();
                         chars.push({
-                            id: t_item._id,
-                            firstname: t_item.firstname,
-                            lastname: t_item.lastname,
-                            job: t_item.job,
-                            handmoney: t_item.handmoney
+                            id: item.Id,
+                            firstname: item.Firstname,
+                            lastname: item.Lastname,
+                            job: 'Arbeitslos',
+                            handmoney: 0
                         });
                     });
                     var dataobj = { data: chars, maxAllowedChars: settings.MaxDefaultAllowedCharacterCount };
@@ -67,7 +138,7 @@ class CorePlayer {
                     rpc.callClient(player, 'EW-Character-Selection', dataobj);
                 }
                 else {
-                    CoreLog_1.default.Debug('No Characters found');
+                    CoreLog_1.default.AddDebugLog('No Characters found');
                     rpc.callClient(player, 'EW-Character-Selection', JSON.stringify({ data: [], maxAllowedChars: settings.MaxDefaultAllowedCharacterCount }));
                 }
             }
@@ -76,8 +147,9 @@ class CorePlayer {
             }
         });
     }
-    OnCharacterDeath(player) {
+    OnCharacterDeath(player, reason = 'Unknown') {
         return __awaiter(this, void 0, void 0, function* () {
+            CoreLog_1.default.AddPlayerLog('Player died at ' + JSON.stringify(player.position) + ' Reason: ' + reason, player);
             player.outputChatBox('You died');
         });
     }
@@ -86,7 +158,7 @@ class CorePlayer {
         player.spawn(new mp.Vector3(settings.NewPlayerStartLocation.x, settings.NewPlayerStartLocation.y, settings.NewPlayerStartLocation.z));
     }
     SpawnAsExistingCharacter(player, playerdata) {
-        let lastposition = JSON.parse(playerdata.lastposition);
+        let lastposition = playerdata.LastLocation;
         player.spawn(new mp.Vector3(lastposition.x, lastposition.y, lastposition.z));
     }
     SaveData(player, data) {

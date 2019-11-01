@@ -3,7 +3,7 @@
  * @Author: Tim Koepsel
  * @Date: 2019-02-19 20:09:28
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-19 20:25:40
+ * @Last Modified time: 2019-10-22 23:45:48
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const BaseLocationAction_1 = require("../../base/BaseLocationAction");
@@ -12,22 +12,22 @@ const CoreLog_1 = require("../../core/CoreLog");
 class LocationWerkstatt extends BaseLocationAction_1.default {
     constructor(werkstattname, position) {
         super(werkstattname, position, 402, 74, 1, new EWDefinitions_1.default(0, 0, 255, 100), (player) => {
-            CoreLog_1.default.Debug('Werkstatt triggered OnEnter()');
+            CoreLog_1.default.AddDebugLog('Werkstatt triggered OnEnter()');
             this.OnEnter(player);
         }, (player) => {
             this.OnExit(player);
-            CoreLog_1.default.Debug('Werkstatt triggered OnExit()');
+            CoreLog_1.default.AddDebugLog('Werkstatt triggered OnExit()');
         });
     }
     OnEnter(player) {
         player.notify('Enter');
         player.outputChatBox('Enter');
-        CoreLog_1.default.Debug('Player entered ColShape');
+        CoreLog_1.default.AddDebugLog('Player entered ColShape');
     }
     OnExit(player) {
         player.notify('Exit');
         player.outputChatBox('Exit');
-        CoreLog_1.default.Debug('Player left ColShape');
+        CoreLog_1.default.AddDebugLog('Player left ColShape');
     }
 }
 exports.default = LocationWerkstatt;

@@ -4,7 +4,6 @@
  * @Last Modified by: Tim Koepsel
  * @Last Modified time: 2019-10-23 00:40:48
  */
-import * as mongoose from "mongoose";
 import * as rpc from 'rage-rpc';
 import * as settings from './config/modsettings.json';
 import CoreApi from "./modules/core/CoreApi";

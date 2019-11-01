@@ -1,33 +1,120 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /*
  * @Author: Tim Koepsel
  * @Date: 2019-02-08 02:29:56
  * @Last Modified by: Tim Koepsel
- * @Last Modified time: 2019-02-19 20:22:28
+ * @Last Modified time: 2019-10-22 23:58:59
  */
-const EWLog_1 = require("../database/schemas/EWLog");
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 const settings = require("../../config/modsettings.json");
+const CoreApi_1 = require("./CoreApi");
 class CoreLog {
     constructor() {
     }
-    AddLog(logmessage, category = 'default', type = 'log') {
-        var t_log = new EWLog_1.EWLog({
-            createdAt: new Date(),
-            message: logmessage,
-            category: category,
-            type: type
+    AddLog(logmessage, category = 'default', logtype = 0, source = 'unknown', printToConsole = false) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var t_log = {
+                    CreatedAt: new Date().toISOString(),
+                    Source: source,
+                    Category: category,
+                    LogType: logtype,
+                    Message: logmessage
+                };
+                yield CoreApi_1.default.post('/logs', t_log);
+                if (printToConsole == true) {
+                    this.PrintConsole(logmessage, true);
+                }
+            }
+            catch (error) {
+                this.PrintConsole('Error while posting log file: ' + JSON.stringify(error));
+            }
         });
-        t_log.save();
     }
-    AddPlayerLog(logmessage, player) {
-        var t_log = new EWLog_1.EWLog({
-            createdAt: new Date(),
-            message: logmessage,
-            category: 'player',
-            type: this.PlayerInfo(player, true)
+    AddSystemLog(logmessage, category = 'System', logtype = 1, source = 'unknown', printToConsole = true) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var t_log = {
+                    CreatedAt: new Date().toISOString(),
+                    Source: source,
+                    Category: category,
+                    LogType: logtype,
+                    Message: logmessage
+                };
+                yield CoreApi_1.default.post('/logs', t_log);
+                if (printToConsole == true) {
+                    this.PrintConsole(logmessage, true);
+                }
+            }
+            catch (error) {
+                this.PrintConsole('Error while posting log file: ' + JSON.stringify(error));
+            }
         });
-        t_log.save();
+    }
+    AddDebugLog(logmessage, source = 'unknown', printToConsole = true) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                if (settings.Debug === false)
+                    return;
+                var t_log = {
+                    CreatedAt: new Date().toISOString(),
+                    Source: source,
+                    Category: 'Debug',
+                    LogType: 2,
+                    Message: logmessage
+                };
+                yield CoreApi_1.default.post('/logs', t_log);
+                if (printToConsole == true) {
+                    this.PrintConsole(logmessage, true);
+                }
+            }
+            catch (error) {
+                this.PrintConsole('Error while posting log file: ' + JSON.stringify(error));
+            }
+        });
+    }
+    AddPlayerLog(logmessage, player, category = 'Player') {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var t_log = {
+                    CreatedAt: new Date().toISOString(),
+                    Source: JSON.stringify(player),
+                    Category: 'Player',
+                    LogType: 3,
+                    Message: logmessage
+                };
+                yield CoreApi_1.default.post('/logs', t_log);
+            }
+            catch (error) {
+                this.PrintConsole('Error while posting player log file: ' + JSON.stringify(error));
+            }
+        });
+    }
+    AddErrorLog(logmessage, source = 'unknown') {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                var t_log = {
+                    CreatedAt: new Date().toISOString(),
+                    Source: source,
+                    Category: 'Errors',
+                    LogType: 999,
+                    Message: JSON.stringify(logmessage)
+                };
+                yield CoreApi_1.default.post('/logs', t_log);
+            }
+            catch (error) {
+                this.PrintConsole('Error while posting log file: ' + JSON.stringify(error));
+            }
+        });
     }
     PlayerInfo(player, detailed = false) {
         if (detailed === false) {
